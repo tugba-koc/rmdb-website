@@ -3,7 +3,11 @@ const nextConfig = {
   reactStrictMode: true,
   swcMinify: true,
   images: {
-    domains: ['image.tmbd.org'],
+    remotePatterns: [
+      {
+        hostname: 'image.tmdb.org',
+      },
+    ],
   },
 };
 

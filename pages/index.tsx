@@ -3,12 +3,14 @@ import { Card, Grid, Header, Hero, Spinner } from '../components';
 import type { NextPage } from 'next';
 import { useState } from 'react';
 import { useFetchMovies } from '../api/fetchHook';
+import { IMAGE_BASE_URL, BACKDROP_SIZE, POSTER_SIZE } from '../config';
 
 const Home: NextPage = () => {
   const [query, setQuery] = useState<string>('');
-  const {data, fetchNextPage, isLoading, isFetching, error } = useFetchMovies(query);
+  const { data, fetchNextPage, isLoading, isFetching, error } =
+    useFetchMovies(query);
   console.log(data);
-  
+
   return (
     <div>
       <Head>
@@ -17,8 +19,20 @@ const Home: NextPage = () => {
         <link rel='icon' href='/favicon.ico' />
       </Head>
       <main className='relative overflow-y-scroll h-screen'>
-        <Header />
-        <Hero />
+        <Header setQuery={setQuery} />
+        {!query && data && data.pages ? (
+          <Hero
+            imgUrl={
+              data.pages[0].results[0].backdrop_path
+                ? IMAGE_BASE_URL +
+                  BACKDROP_SIZE +
+                  data.pages[0].results[0].backdrop_path
+                : '/public/no_image.jpg'
+            }
+            title={data.pages[0].results[0].title}
+            text={data.pages[0].results[0].overview}
+          />
+        ) : null}
         <Grid />
         <Card />
         <Spinner />

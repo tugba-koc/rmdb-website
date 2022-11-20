@@ -1,7 +1,12 @@
 import Link from 'next/link';
 import Image from 'next/image';
+import { SearchInput } from '../SearchInput';
 
-export const Header = () => {
+type Props = {
+  setQuery?: React.Dispatch<React.SetStateAction<string>>;
+};
+
+export const Header: React.FC<Props> = ({ setQuery }) => {
   return (
     <div className='stick top-0 z-40 w-full h-24 bg-zinc-900 '>
       <div className='flex justify-between w-full h-full max-w-7xl px-4 items-center m-auto'>
@@ -27,6 +32,11 @@ export const Header = () => {
             </div>
           </div>
         </Link>
+        {setQuery ? (
+          <div className='relative flex items-center'>
+            <SearchInput setQuery={setQuery} />
+          </div>
+        ) : null}
       </div>
     </div>
   );

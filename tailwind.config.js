@@ -1,14 +1,18 @@
 /** @type {import('tailwindcss').Config} */
 module.exports = {
   content: [
-    "./pages/**/*.{js,ts,jsx,tsx}",
-    "./components/**/*.{js,ts,jsx,tsx}",
+    './pages/**/*.{js,ts,jsx,tsx}',
+    './components/**/*.{js,ts,jsx,tsx}',
   ],
   theme: {
-    extend: {},
+    extend: {
+      height: {
+        128: '40rem',
+      },
+    },
     fontFamily: {
-      raleway : ['Raleway', 'sans-serif']
-    }
+      raleway: ['Raleway', 'sans-serif'],
+    },
   },
   plugins: [],
-}
+};
